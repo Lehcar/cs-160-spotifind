@@ -1,4 +1,5 @@
 import spotipy
+import json
 
 sp = spotipy.Spotify()
 
@@ -14,23 +15,26 @@ sp = spotipy.Spotify()
 
 import spotipy.util as util
 
-scope = 'user-top-read'
-your_username = 'thepunisherspunishing'
+scope = "user-top-read user-read-private"
+your_username = input("Enter your username")
 
 token = util.prompt_for_user_token(
         username=your_username,
         scope=scope,
         client_id='98e1af2c2aad45ecad9997543623cbbf',
         client_secret='bf63ae87996f4f1aad31335abb361d4e',
-        redirect_uri='https://www.getpostman.com/oauth2/callback')
-
-spotify = spotipy.Spotify(auth=token)
+        redirect_uri='https://localhost:8888/callback/')
 
 # results = sp.search(q='weezer', limit=20)
 # for i, t in enumerate(results['tracks']['items']):
 #     print(' ', i, t['name'])
 
-top_artists = sp.current_user_top_artists(limit=50, offset=0, time_range='long_term')
+if token:
+        sp = spotipy.Spotify(auth=token)
+        top_artists = sp.current_user_top_artists(limit=50, offset=0, time_range='long_term')
+        top_artists_json = json.dumps(top_artists)
+        top_artists_json = json.loads(top_artists_json)
+        print(top_artists_json)
 
 
 #
