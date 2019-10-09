@@ -1,17 +1,17 @@
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 
 
-@app.route('/')
 @app.route('/home')
-def hello_world():
-    return 'Hello World!'
+def homepage():
+    return render_template('Home.html')
 
 
+@app.route('/')
 @app.route('/login')
 def login_page():
-    return 'Click Here to log in!'
+    return render_template('Login.html')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=8888, debug=True)
