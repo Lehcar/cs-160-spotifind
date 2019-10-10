@@ -11,10 +11,10 @@ import pprint
 # token = credentials.get_access_token()
 
 #scope = 'user-top-read'
-your_username = 'thepunisherspunishing'
+#your_username = 'thepunisherspunishing'
 
 scope = "user-top-read user-read-private"
-#your_username = input("Enter your username: ")
+your_username = raw_input("Enter your username: ")
 
 token = util.prompt_for_user_token(
         username=your_username,
