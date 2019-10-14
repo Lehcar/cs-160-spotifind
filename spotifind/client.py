@@ -5,13 +5,20 @@ import pprint
 client_id = '98e1af2c2aad45ecad9997543623cbbf'
 client_secret = 'bf63ae87996f4f1aad31335abb361d4e'
 redirect_uri = 'https://localhost:8888/callback/'
+scope = "user-top-read user-read-private"
 
 
-# get authorization token for the user
-# Parameters:
-# username - Spotify username of the user
-# scope - scope of the authorization
-def getToken(username, scope):
+"""Gets authorization token for the user
+
+Args:
+    username: Spotify username of the user.
+    scope: scope of the auth 
+
+Returns:
+    token used for authorization
+
+"""
+def get_token(username, scope):
     token = util.prompt_for_user_token(
         username=username,
         scope=scope,
@@ -21,13 +28,18 @@ def getToken(username, scope):
     return token
 
 
-# get audio features of all tracks user gives
-# Parameters:
-# token - authorization token
-# tracks - one or multiple tracks identified by their Spotify IDs (50 max)
-# audio features parameters:
-# tracks - one or multiple tracks identified by their Spotify IDs (50 max)
-def getAudioFeatures(token, tracks):
+"""Gets audio features of multiple tracks
+
+Args:
+    token: authorization token
+    tracks: one or multiple tracks identified by their Spotify IDs (50 max)
+
+Returns:
+    audio features for the tracks
+    https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-audio-features/
+
+"""
+def get_audio_features(token, tracks):
     if token:
         sp = spotipy.Spotify(auth=token)
         audio_features = sp.audio_features(tracks)
@@ -35,47 +47,51 @@ def getAudioFeatures(token, tracks):
         return audio_features
 
 
-# get top artists for user
-# Parameters:
-# token - authorization token
-# time_range - time range user chooses to get top artist
-# top artist parameters:
-# limit - the number of entities to return
-# offset - the index of the first entity to return
-# time_range - Over what time frame are the affinities computed Valid-values: short_term, medium_term, long_term
-def getTopArtists(token, time_range):
+"""Get user's top artists
+
+Args:
+    token: authorization token
+    time_range: ('short_term', 'medium_term', 'long_term') the user's top artists for specified time range
+
+Returns:
+    user's top artists for specified time range
+    https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/
+
+"""
+def get_top_artists(token, time_range):
     if token:
         sp = spotipy.Spotify(auth=token)
+        # limit - the number of entities to return (max 50)
+        # offset - the index of the first entity to return
         top_artists = sp.current_user_top_artists(limit=50, offset=0, time_range=time_range)
         pprint.pprint(top_artists)
         return top_artists
 
 
-# get top tracks for user
-# Parameters:
-# token - authorization token
-# time_range - time range user chooses to get top tracks
-# top track parameters:
-# limit - the number of entities to return
-# offset - the index of the first entity to return
-# time_range - Over what time frame are the affinities computed Valid-values: short_term, medium_term, long_term
-def getTopTracks(token, time_range):
+"""Get user's top tracks
+
+Args:
+    token: authorization token
+    time_range: ('short_term', 'medium_term', 'long_term') the user's top artists for specified time range
+
+Returns:
+    user's top artists for specified time range
+    https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/
+
+"""
+def get_top_tracks(token, time_range):
     if token:
         sp = spotipy.Spotify(auth=token)
+        # limit - the number of entities to return
+        # offset - the index of the first entity to return
         top_tracks = sp.current_user_top_tracks(limit=50, offset=0, time_range=time_range)
         pprint.pprint(top_tracks)
         return top_tracks
 
 
 your_username = input("Enter your username: ")
-
-scope = "user-top-read user-read-private"
-token = getToken(your_username, scope)
+token = get_token(your_username, scope)
 
 # time_ranges: 'short_term' | 'medium_term' | 'long_term'
 time_range = 'long_term'
 
-# functions:
-# getTopArtists(token, time_range)
-# getTopTracks(token, time_range)
-# getAudioFeatures(token, '3FoiMgXMrO3D5FeJuotKyZ')
