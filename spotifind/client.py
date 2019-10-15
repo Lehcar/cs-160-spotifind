@@ -7,7 +7,6 @@ client_secret = 'bf63ae87996f4f1aad31335abb361d4e'
 redirect_uri = 'https://localhost:8888/callback/'
 scope = "user-top-read user-read-private"
 
-
 """Gets authorization token for the user
 
 Args:
@@ -18,6 +17,8 @@ Returns:
     token used for authorization
 
 """
+
+
 def get_token(username, scope):
     token = util.prompt_for_user_token(
         username=username,
@@ -39,6 +40,8 @@ Returns:
     https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-audio-features/
 
 """
+
+
 def get_audio_features(token, tracks):
     if token:
         sp = spotipy.Spotify(auth=token)
@@ -58,12 +61,14 @@ Returns:
     https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/
 
 """
-def get_top_artists(token, time_range):
+
+
+def get_top_artists(token, limit, time_range):
     if token:
         sp = spotipy.Spotify(auth=token)
         # limit - the number of entities to return (max 50)
         # offset - the index of the first entity to return
-        top_artists = sp.current_user_top_artists(limit=50, offset=0, time_range=time_range)
+        top_artists = sp.current_user_top_artists(limit=limit, offset=0, time_range=time_range)
         pprint.pprint(top_artists)
         return top_artists
 
@@ -79,18 +84,21 @@ Returns:
     https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/
 
 """
-def get_top_tracks(token, time_range):
+
+
+def get_top_tracks(token, limit, time_range):
     if token:
         sp = spotipy.Spotify(auth=token)
         # limit - the number of entities to return
         # offset - the index of the first entity to return
-        top_tracks = sp.current_user_top_tracks(limit=50, offset=0, time_range=time_range)
+        top_tracks = sp.current_user_top_tracks(limit=limit, offset=0, time_range=time_range)
         pprint.pprint(top_tracks)
         return top_tracks
 
-
-your_username = input("Enter your username: ")
-token = get_token(your_username, scope)
+# make a main for the below?
+# your_username = input("Enter your username: ")
+# token = get_token(your_username, scope)
+# print(token) # --> this is because you need to get the token for the tests
 
 # time_ranges: 'short_term' | 'medium_term' | 'long_term'
 time_range = 'long_term'
