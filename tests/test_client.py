@@ -1,8 +1,7 @@
 import pytest
+import json
 
 from spotifind.client import get_audio_features, get_top_artists, get_top_tracks
-
-# get_token
 
 client_id = '98e1af2c2aad45ecad9997543623cbbf'
 client_secret = 'bf63ae87996f4f1aad31335abb361d4e'
@@ -10,7 +9,7 @@ redirect_uri = 'https://localhost:8888/callback/'
 time_range = 'long_term'
 
 # before running tests fill these categories:
-token = 'BQC7pPvxVKxuanoq9oSFbpUzxMdj5PH3l9R61olRMXfULgCiHQZmvlJFleUxgyHYL85gL8oz2eCOORYDubs6qd2A1yNVT6L18BDhuTTA1WrdVAfHEMZKW4iCOgM3gyB_V9c38pZ8ETiCLhuoyvZo45I3_C9trjRmy6kax-PVo6k '
+token = 'BQDJUlIoQy-oaQ1Q5fI_j9kjB2_H83Tm4Dc_ix0Gf7DWwSX1-Pop75GV6RmPDtELxLavr1blSUd5j0a8ifjAprXofXMzpX1xp2TLI2eh1pEXTg1XLwE5e99IcquccSzuaEUDIkIamLnQbYy_opGSyz9mEhnqlK94re9At96G_w0'
 # get token by uncommenting the part where you could get a token, print it out, and then copy here
 username = 'AnthonyTech88'
 
@@ -18,10 +17,11 @@ username = 'AnthonyTech88'
 # also redo all the values in the tests
 
 
-class TestClient:
+class TestClientValues:
     # def test_get_token(self):
     #     assert get_token(username, "user-top-read user-read-private").exists()
 
+    @pytest.mark.skip(reason="must fill in our own values")
     def test_get_audio_features(self):
         value = [{'acousticness': 0.0417,
                   'analysis_url': 'https://api.spotify.com/v1/audio-analysis/3FoiMgXMrO3D5FeJuotKyZ',
@@ -34,6 +34,7 @@ class TestClient:
                   'uri': 'spotify:track:3FoiMgXMrO3D5FeJuotKyZ', 'valence': 0.526}]
         assert get_audio_features(token, '3FoiMgXMrO3D5FeJuotKyZ') == value
 
+    @pytest.mark.skip(reason="must fill in our own values")
     def test_get_top_artists(self):
         value = {'href': 'https://api.spotify.com/v1/me/top/artists?limit=10&offset=0&time_range=long_term',
                  'items': [{'external_urls': {'spotify': 'https://open.spotify.com/artist/6nfDaffa50mKtEOwR8g4df'},
@@ -239,16 +240,17 @@ class TestClient:
                  'total': 50}
         assert get_top_artists(token, 10, time_range) == value
 
+    @pytest.mark.skip(reason="must fill in our own values")
     def test_get_top_tracks(self):
         value = {'href': 'https://api.spotify.com/v1/me/top/tracks?limit=2&offset=0&time_range=long_term',
                  'items': [{'album': {'album_type': 'ALBUM',
                                       'artists': [{'external_urls': {
                                           'spotify': 'https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny'},
-                                                   'href': 'https://api.spotify.com/v1/artists/6LuN9FCkKOj5PcnpouEgny',
-                                                   'id': '6LuN9FCkKOj5PcnpouEgny',
-                                                   'name': 'Khalid',
-                                                   'type': 'artist',
-                                                   'uri': 'spotify:artist:6LuN9FCkKOj5PcnpouEgny'}],
+                                          'href': 'https://api.spotify.com/v1/artists/6LuN9FCkKOj5PcnpouEgny',
+                                          'id': '6LuN9FCkKOj5PcnpouEgny',
+                                          'name': 'Khalid',
+                                          'type': 'artist',
+                                          'uri': 'spotify:artist:6LuN9FCkKOj5PcnpouEgny'}],
                                       'available_markets': ['AD',
                                                             'AE',
                                                             'AR',
@@ -450,11 +452,11 @@ class TestClient:
                            {'album': {'album_type': 'ALBUM',
                                       'artists': [{'external_urls': {
                                           'spotify': 'https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny'},
-                                                   'href': 'https://api.spotify.com/v1/artists/6LuN9FCkKOj5PcnpouEgny',
-                                                   'id': '6LuN9FCkKOj5PcnpouEgny',
-                                                   'name': 'Khalid',
-                                                   'type': 'artist',
-                                                   'uri': 'spotify:artist:6LuN9FCkKOj5PcnpouEgny'}],
+                                          'href': 'https://api.spotify.com/v1/artists/6LuN9FCkKOj5PcnpouEgny',
+                                          'id': '6LuN9FCkKOj5PcnpouEgny',
+                                          'name': 'Khalid',
+                                          'type': 'artist',
+                                          'uri': 'spotify:artist:6LuN9FCkKOj5PcnpouEgny'}],
                                       'available_markets': ['AD',
                                                             'AE',
                                                             'AR',
@@ -659,3 +661,18 @@ class TestClient:
                  'previous': None,
                  'total': 50}
         assert get_top_tracks(token, 2, time_range) == value
+
+
+class TestClientNull:
+    def test_not_null_get_audio_features(self):
+        assert get_audio_features(token, '3FoiMgXMrO3D5FeJuotKyZ') is not None
+
+    def test_not_null_get_top_artists(self):
+        assert get_top_artists(token, 50, 'short_term') is not None
+        assert get_top_artists(token, 50, 'medium_term') is not None
+        assert get_top_artists(token, 50, 'long_term') is not None
+
+    def test_not_null_get_top_tracks(self):
+        assert get_top_tracks(token, 50, 'short_term') is not None
+        assert get_top_tracks(token, 50, 'medium_term') is not None
+        assert get_top_tracks(token, 50, 'long_term') is not None
