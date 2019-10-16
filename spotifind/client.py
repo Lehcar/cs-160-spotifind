@@ -1,6 +1,5 @@
 import spotipy
 import spotipy.util as util
-import pprint
 
 client_id = '98e1af2c2aad45ecad9997543623cbbf'
 client_secret = 'bf63ae87996f4f1aad31335abb361d4e'
@@ -33,7 +32,8 @@ def get_token(username, scope):
 
 Args:
     token: authorization token
-    tracks: one or multiple tracks identified by their Spotify IDs (50 max)
+    tracks: one or multiple tracks identified by their Spotify IDs (50 max), a list of track URIs, URLs or IDs,max: 50
+
 
 Returns:
     audio features for the tracks
@@ -46,7 +46,6 @@ def get_audio_features(token, tracks):
     if token:
         sp = spotipy.Spotify(auth=token)
         audio_features = sp.audio_features(tracks)
-        pprint.pprint(audio_features)
         return audio_features
 
 
@@ -69,7 +68,6 @@ def get_top_artists(token, limit, time_range):
         # limit - the number of entities to return (max 50)
         # offset - the index of the first entity to return
         top_artists = sp.current_user_top_artists(limit=limit, offset=0, time_range=time_range)
-        pprint.pprint(top_artists)
         return top_artists
 
 
@@ -92,7 +90,6 @@ def get_top_tracks(token, limit, time_range):
         # limit - the number of entities to return
         # offset - the index of the first entity to return
         top_tracks = sp.current_user_top_tracks(limit=limit, offset=0, time_range=time_range)
-        pprint.pprint(top_tracks)
         return top_tracks
 
 # make a main for the below?
@@ -101,5 +98,4 @@ def get_top_tracks(token, limit, time_range):
 # print(token) # --> this is because you need to get the token for the tests
 
 # time_ranges: 'short_term' | 'medium_term' | 'long_term'
-time_range = 'long_term'
 
