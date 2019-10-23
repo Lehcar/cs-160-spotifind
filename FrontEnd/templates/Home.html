@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>SpotiFind</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../static/HomeStyle.css">
 </head>
 <body>
 
 <div class="header">
-    <a href="/home" style="float:right"><img src="images\logo1.png" alt="SpotiFind Home" style="width:42px;height:42px;border:0;"></a>
-</div>
+    <a class="image" href="/home">
+        <img alt="SpotiFind Home" src="../static/logo1.png" height="40" width="200" >
+    </a>
 
+</div>
     <h1>THIS IS YOUR HOME PAGE</h1>
     <ol>
-        <li><a href="https://www.spotify.com/"><h4>Open In Spotify</h4></a></li>
+        <li><a href="https://www.spotify.com/" target="_blank"><h4>Open In Spotify</h4></a></li>
         <li><a href="/statQuery"><h4>Analyze Your Music</h4></a></li>
 
         <!-- Stretch Goals
@@ -21,5 +23,6 @@
         <li><a href="/trackAnalysis"><h4>Stats For This Song</h4></a></li>
         -->
     </ol>
+
 </body>
 </html>
