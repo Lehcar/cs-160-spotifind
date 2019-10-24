@@ -2,40 +2,36 @@ import pytest
 
 from spotifind.client import get_audio_features, get_top_artists, get_top_tracks
 
-# get_token
-
 client_id = '98e1af2c2aad45ecad9997543623cbbf'
 client_secret = 'bf63ae87996f4f1aad31335abb361d4e'
 redirect_uri = 'https://localhost:8888/callback/'
 time_range = 'long_term'
 
 # before running tests fill these categories:
-token = 'BQC7pPvxVKxuanoq9oSFbpUzxMdj5PH3l9R61olRMXfULgCiHQZmvlJFleUxgyHYL85gL8oz2eCOORYDubs6qd2A1yNVT6L18BDhuTTA1WrdVAfHEMZKW4iCOgM3gyB_V9c38pZ8ETiCLhuoyvZo45I3_C9trjRmy6kax-PVo6k '
+token = 'BQBc2tvBr8fFA8OpniqT4lXApMxFnYaODoYiRLtUVoKvJpMB4ozxGwQKefdyWsSQ7cDtnCrmEY4JN9rqlY7ro1s8LgL6XhAhnUV0v0GdtYBRY1VNMSkKG8Ar9hk1WZFZQZTeKIIx2ARya1yXRwgmN-Y2S2y6Yu5n9XVr2lluHU0'
 # get token by uncommenting the part where you could get a token, print it out, and then copy here
-username = 'AnthonyTech88'
+username = ''
 
 
-# also redo all the values in the tests
+class TestClientNull:
+    def test_not_null_get_audio_features(self):
+        assert get_audio_features(token, '3FoiMgXMrO3D5FeJuotKyZ') is not None
+        assert get_audio_features(token, ['6D7PMEnCmHMC5WJb2HOGc3', '3FoiMgXMrO3D5FeJuotKyZ']) is not None
+
+    def test_not_null_get_top_artists(self):
+        assert get_top_artists(token, 50, 'short_term') is not None
+        assert get_top_artists(token, 50, 'medium_term') is not None
+        assert get_top_artists(token, 50, 'long_term') is not None
+
+    def test_not_null_get_top_tracks(self):
+        assert get_top_tracks(token, 50, 'short_term') is not None
+        assert get_top_tracks(token, 50, 'medium_term') is not None
+        assert get_top_tracks(token, 50, 'long_term') is not None
 
 
-class TestClient:
-    # def test_get_token(self):
-    #     assert get_token(username, "user-top-read user-read-private").exists()
-
-    def test_get_audio_features(self):
-        value = [{'acousticness': 0.0417,
-                  'analysis_url': 'https://api.spotify.com/v1/audio-analysis/3FoiMgXMrO3D5FeJuotKyZ',
-                  'danceability': 0.596,
-                  'duration_ms': 209519, 'energy': 0.893, 'id': '3FoiMgXMrO3D5FeJuotKyZ', 'instrumentalness': 0,
-                  'key': 1,
-                  'liveness': 0.315, 'loudness': -3.43, 'mode': 0, 'speechiness': 0.16, 'tempo': 79.889,
-                  'time_signature': 4,
-                  'track_href': 'https://api.spotify.com/v1/tracks/3FoiMgXMrO3D5FeJuotKyZ', 'type': 'audio_features',
-                  'uri': 'spotify:track:3FoiMgXMrO3D5FeJuotKyZ', 'valence': 0.526}]
-        assert get_audio_features(token, '3FoiMgXMrO3D5FeJuotKyZ') == value
-
-    def test_get_top_artists(self):
-        value = {'href': 'https://api.spotify.com/v1/me/top/artists?limit=10&offset=0&time_range=long_term',
+# for this class must fill in these values:
+top_artist_limit = 10
+top_artist_value = {'href': 'https://api.spotify.com/v1/me/top/artists?limit=10&offset=0&time_range=long_term',
                  'items': [{'external_urls': {'spotify': 'https://open.spotify.com/artist/6nfDaffa50mKtEOwR8g4df'},
                             'followers': {'href': None, 'total': 2851367},
                             'genres': ['k-pop', 'k-pop boy group'],
@@ -237,18 +233,16 @@ class TestClient:
                  'offset': 0,
                  'previous': None,
                  'total': 50}
-        assert get_top_artists(token, 10, time_range) == value
-
-    def test_get_top_tracks(self):
-        value = {'href': 'https://api.spotify.com/v1/me/top/tracks?limit=2&offset=0&time_range=long_term',
+top_track_limit = 2
+top_track_value = {'href': 'https://api.spotify.com/v1/me/top/tracks?limit=2&offset=0&time_range=long_term',
                  'items': [{'album': {'album_type': 'ALBUM',
                                       'artists': [{'external_urls': {
                                           'spotify': 'https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny'},
-                                                   'href': 'https://api.spotify.com/v1/artists/6LuN9FCkKOj5PcnpouEgny',
-                                                   'id': '6LuN9FCkKOj5PcnpouEgny',
-                                                   'name': 'Khalid',
-                                                   'type': 'artist',
-                                                   'uri': 'spotify:artist:6LuN9FCkKOj5PcnpouEgny'}],
+                                          'href': 'https://api.spotify.com/v1/artists/6LuN9FCkKOj5PcnpouEgny',
+                                          'id': '6LuN9FCkKOj5PcnpouEgny',
+                                          'name': 'Khalid',
+                                          'type': 'artist',
+                                          'uri': 'spotify:artist:6LuN9FCkKOj5PcnpouEgny'}],
                                       'available_markets': ['AD',
                                                             'AE',
                                                             'AR',
@@ -450,11 +444,11 @@ class TestClient:
                            {'album': {'album_type': 'ALBUM',
                                       'artists': [{'external_urls': {
                                           'spotify': 'https://open.spotify.com/artist/6LuN9FCkKOj5PcnpouEgny'},
-                                                   'href': 'https://api.spotify.com/v1/artists/6LuN9FCkKOj5PcnpouEgny',
-                                                   'id': '6LuN9FCkKOj5PcnpouEgny',
-                                                   'name': 'Khalid',
-                                                   'type': 'artist',
-                                                   'uri': 'spotify:artist:6LuN9FCkKOj5PcnpouEgny'}],
+                                          'href': 'https://api.spotify.com/v1/artists/6LuN9FCkKOj5PcnpouEgny',
+                                          'id': '6LuN9FCkKOj5PcnpouEgny',
+                                          'name': 'Khalid',
+                                          'type': 'artist',
+                                          'uri': 'spotify:artist:6LuN9FCkKOj5PcnpouEgny'}],
                                       'available_markets': ['AD',
                                                             'AE',
                                                             'AR',
@@ -658,4 +652,29 @@ class TestClient:
                  'offset': 0,
                  'previous': None,
                  'total': 50}
-        assert get_top_tracks(token, 2, time_range) == value
+
+
+class TestClientValues:
+    def test_get_audio_features(self):
+        af_value = [{'acousticness': 0.0417,
+                     'analysis_url': 'https://api.spotify.com/v1/audio-analysis/3FoiMgXMrO3D5FeJuotKyZ',
+                     'danceability': 0.596,
+                     'duration_ms': 209519, 'energy': 0.893, 'id': '3FoiMgXMrO3D5FeJuotKyZ', 'instrumentalness': 0,
+                     'key': 1,
+                     'liveness': 0.315, 'loudness': -3.43, 'mode': 0, 'speechiness': 0.16, 'tempo': 79.889,
+                     'time_signature': 4,
+                     'track_href': 'https://api.spotify.com/v1/tracks/3FoiMgXMrO3D5FeJuotKyZ', 'type': 'audio_features',
+                     'uri': 'spotify:track:3FoiMgXMrO3D5FeJuotKyZ', 'valence': 0.526}]
+        assert get_audio_features(token, '3FoiMgXMrO3D5FeJuotKyZ') == af_value
+
+    def test_get_audio_features_multiple(self):
+        af_mult_value = [{'danceability': 0.613, 'energy': 0.899, 'key': 10, 'loudness': -2.632, 'mode': 0, 'speechiness': 0.0825, 'acousticness': 0.0708, 'instrumentalness': 0, 'liveness': 0.128, 'valence': 0.702, 'tempo': 124.09, 'type': 'audio_features', 'id': '6D7PMEnCmHMC5WJb2HOGc3', 'uri': 'spotify:track:6D7PMEnCmHMC5WJb2HOGc3', 'track_href': 'https://api.spotify.com/v1/tracks/6D7PMEnCmHMC5WJb2HOGc3', 'analysis_url': 'https://api.spotify.com/v1/audio-analysis/6D7PMEnCmHMC5WJb2HOGc3', 'duration_ms': 189378, 'time_signature': 4}, {'danceability': 0.596, 'energy': 0.893, 'key': 1, 'loudness': -3.43, 'mode': 0, 'speechiness': 0.16, 'acousticness': 0.0417, 'instrumentalness': 0, 'liveness': 0.315, 'valence': 0.526, 'tempo': 79.889, 'type': 'audio_features', 'id': '3FoiMgXMrO3D5FeJuotKyZ', 'uri': 'spotify:track:3FoiMgXMrO3D5FeJuotKyZ', 'track_href': 'https://api.spotify.com/v1/tracks/3FoiMgXMrO3D5FeJuotKyZ', 'analysis_url': 'https://api.spotify.com/v1/audio-analysis/3FoiMgXMrO3D5FeJuotKyZ', 'duration_ms': 209519, 'time_signature': 4}]
+        assert get_audio_features(token, ['6D7PMEnCmHMC5WJb2HOGc3', '3FoiMgXMrO3D5FeJuotKyZ']) == af_mult_value
+
+    @pytest.mark.skip(reason="must fill in our own values")
+    def test_get_top_artists(self):
+        assert get_top_artists(token, top_artist_limit, time_range) == top_artist_value
+
+    @pytest.mark.skip(reason="must fill in our own values")
+    def test_get_top_tracks(self):
+        assert get_top_tracks(token, top_track_limit, time_range) == top_track_value
