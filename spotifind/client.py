@@ -92,10 +92,8 @@ def get_top_tracks(token, limit, time_range):
         top_tracks = sp.current_user_top_tracks(limit=limit, offset=0, time_range=time_range)
         return top_tracks
 
-# make a main for the below?
 # your_username = input("Enter your username: ")
 # token = get_token(your_username, scope)
-# print(token) # --> this is because you need to get the token for the tests
 
 # time_ranges: 'short_term' | 'medium_term' | 'long_term'
 
