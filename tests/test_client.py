@@ -1,14 +1,9 @@
 import pytest
 
-from spotifind.client import get_audio_features, get_top_artists, get_top_tracks
-
-client_id = '98e1af2c2aad45ecad9997543623cbbf'
-client_secret = 'bf63ae87996f4f1aad31335abb361d4e'
-redirect_uri = 'https://localhost:8888/callback/'
-time_range = 'long_term'
+from src.client import get_audio_features, get_top_tracks, get_top_artists
 
 # before running tests fill these categories:
-token = 'BQBc2tvBr8fFA8OpniqT4lXApMxFnYaODoYiRLtUVoKvJpMB4ozxGwQKefdyWsSQ7cDtnCrmEY4JN9rqlY7ro1s8LgL6XhAhnUV0v0GdtYBRY1VNMSkKG8Ar9hk1WZFZQZTeKIIx2ARya1yXRwgmN-Y2S2y6Yu5n9XVr2lluHU0'
+token = 'BQD1SwrIc1vYIxVXQmOGhPbC1LpSsEUtY2k7kOYmOUvuS9ML8iKv-8_YznxX4h8nD4SmMUETaq9V7jfcmdEiOY8u50h8xt2Tw1Azd8svkJPwp81xAYKRRM08r8PKvuInhVeObHF4-HmDdNzC39EfCUphgOejZcpn1g0sCEOXL-w'
 # get token by uncommenting the part where you could get a token, print it out, and then copy here
 username = ''
 

@@ -1,0 +1,43 @@
+body{
+    background-color: green;
+    background-size: cover;
+}
+
+.logo{
+    float:right;
+}
+
+.results{
+    background-color: white;
+    border: none;
+    width: 500px;
+    height: 700px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    text-align: center;
+    overflow:scroll;
+    border-radius: 30px;
+    margin: 20px 20px;
+    font-family: 'Arial Black';
+    text-align: left;
+}
+
+
+.results::-webkit-scrollbar {
+    display: none;
+}
+
+h2{
+    margin-left: 15px;
+}
+
+ol{
+    margin: 10px 10px 10px 10px;
+}
+
+#artists{
+    float: left;
+}
+
+#tracks{
+    float:left;
+}

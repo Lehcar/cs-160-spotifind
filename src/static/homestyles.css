@@ -1,0 +1,43 @@
+body{
+    background-color: green;
+}
+
+.logo{
+    float:right;
+}
+
+.displaybox{
+    background-color: white;
+    border: none;
+    width: 700px;
+    height: 400px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    text-align: center;
+    border-radius: 30px;
+    margin: 20px 20px;
+    font-family: 'Arial Black';
+    text-align: left;
+}
+
+.nowPlaying{
+    margin-left: 15px;
+}
+
+.optionsDiv{
+    margin-top: 70px;
+}
+
+.menuOption{
+    background-color: white;
+    border: none;
+    font-family: 'Arial Black';
+    font-size: x-large;
+    width: 530px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #A71919;
+    padding: 10px 20px;
+    text-align: center;
+    margin: 20px 20px;
+    cursor: pointer;
+    border-radius: 30px;
+}

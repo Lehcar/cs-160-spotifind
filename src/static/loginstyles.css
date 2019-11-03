@@ -1,0 +1,41 @@
+html{
+    height: 100%;
+    margin: 0%
+}
+
+body{
+    background-image: url(../static/RecordImage.png);
+    height: 100%;
+    margin:0;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+h3{
+    font-family:'Arial';
+    color: white;
+    text-shadow: black;
+}
+
+
+.MainText{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    margin-left: -275px
+}
+
+.loginButton{
+    background-color: white;
+    border: none;
+    font-family: 'Arial Black';
+    font-size: x-large;
+    width: 530px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: #A71919;
+    padding: 10px 20px;
+    text-align: center;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 30px;
+}
