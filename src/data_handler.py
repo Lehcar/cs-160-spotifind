@@ -1,5 +1,5 @@
 import json
-from src.client import get_audio_features, get_top_artists, get_top_tracks
+import requests
 
 track_ids = []
 top_track_names = []
@@ -9,33 +9,41 @@ live_tracks = []
 studio_tracks = []
 acoustic_tracks = []
 non_acoustic_tracks = []
+top_artist_image = None
 
-artist_images = []
+# Spotify URLS
+SPOTIFY_USERS_TOP_TRACKS = "https://api.spotify.com/v1/me/top/tracks"
+SPOTIFY_USERS_TOP_ARTISTS= "https://api.spotify.com/v1/me/top/artists"
+SPOTIFY_AUDIO_FEATURES = "https://api.spotify.com/v1/audio-features"
 
 
-def get_data():
-    #your_username = input("Enter your username: ")
-    # scope = "user-top-read"
-    # token = get_token(your_username, scope)
-    # time_ranges: 'short_term' | 'medium_term' | 'long_term'
-    time_range = 'long_term'
-    limit = 50
+def get_data(access_token, time_range):
 
-    tracks = get_top_tracks(limit, time_range)
+    authorization_header = {"Authorization": "Bearer {}".format(access_token)}
+
+    # Get user top tracks
+    user_top_tracks_api_endpoint = SPOTIFY_USERS_TOP_TRACKS
+    top_track_params = {"limit": "50", "time_range": time_range}
+    tracks = requests.get(user_top_tracks_api_endpoint, headers=authorization_header, params=top_track_params).json()
     items = tracks['items']
     for x in items:
         top_track_names.append(x['name'])
         track_ids.append(x['id'])
 
-    artists = get_top_artists(tlimit, time_range)
-    artist_items = artists['items']
-    for artist in artist_items:
+    user_top_tracks_api_endpoint = SPOTIFY_USERS_TOP_ARTISTS
+    top_artist_params = {"limit": "50", "time_range": time_range}
+    artists = requests.get(user_top_tracks_api_endpoint, headers=authorization_header, params=top_artist_params).json()
+    for artist in artists['items']:
         top_artist_names.append(artist['name'])
         top_genres.append(artist['genres'])
-        artist_images.append(artist['images'][0]['url'])
+    global top_artist_image
+    top_artist_image = artists['items'][0]['images'][0]['url']
 
-    features = get_audio_features(track_ids)
-    for track in features:
+    get_audio_features_api_endpoint = SPOTIFY_AUDIO_FEATURES
+    audio_features_params = {"ids": track_ids}
+    features = requests.get(get_audio_features_api_endpoint, headers=authorization_header, params=audio_features_params).json()
+
+    for track in features['audio_features']:
         if track['liveness'] > 0.8:
             live_tracks.append(track['id'])
         else:
@@ -45,8 +53,10 @@ def get_data():
         else:
             non_acoustic_tracks.append(track['id'])
 
-def get_top_artist_images():
-    return artist_images[0]
+
+def get_top_artist_image():
+    return top_artist_image
+
 
 def get_top_track_names():
     return top_track_names
@@ -82,7 +92,3 @@ def get_non_acoustic_track_list():
 
 def get_percentage_acoustic():
     return str((len(get_acoustic_track_list()) / (len(get_acoustic_track_list()) + len(get_non_acoustic_track_list()))) * 100) + "%"
-
-
-# top track names, top artist names, top genres, list of top genres names,
-# number of studio tracks, number of live tracks
