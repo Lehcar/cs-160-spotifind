@@ -122,6 +122,10 @@ def get_percentage_live():
     return str((len(get_live_track_list()) / (len(get_live_track_list()) + len(get_studio_track_list()))) * 100) + "%"
 
 
+def get_live_data():
+    return {'live_list': get_live_track_list(), 'studio_list': get_studio_track_list(), 'num_live': len(get_live_track_list()), 'num_studio': len(get_studio_track_list())}
+
+
 def get_acoustic_track_list():
     return acoustic_tracks
 
@@ -133,3 +137,7 @@ def get_non_acoustic_track_list():
 def get_percentage_acoustic():
     return str((len(get_acoustic_track_list()) / (
                 len(get_acoustic_track_list()) + len(get_non_acoustic_track_list()))) * 100) + "%"
+
+
+def get_acoustic_data():
+    return {'acoustic_list': get_acoustic_track_list(), 'non_acoustic_list': get_non_acoustic_track_list(), 'num_acoustic': len(get_acoustic_track_list()), 'num_non_acoustic': len(get_non_acoustic_track_list())}
