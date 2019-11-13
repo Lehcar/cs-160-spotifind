@@ -21,7 +21,7 @@ REDIRECT_URI = "http://localhost:8888/callback"
 SCOPE = "user-top-read"
 #can be short_term, medium_term, or long_term
 #TODO: take this in from user input
-TIME_RANGE = "long_term"
+TIME_RANGE = "medium_term"
 
 auth_query_parameters = {
     "response_type": "code",
@@ -68,9 +68,10 @@ def callback():
     top_track_names = dh.get_top_track_names()
     top_artist_names = dh.get_top_artist_names()
     top_artist_image = dh.get_top_artist_image()
+    top_genres = dh.get_top_genres_data()['top_50_genres_list']
 
     return render_template('stat-query.html', artists=top_artist_names,
-                           tracks=top_track_names, top_artist_image=top_artist_image)
+                           tracks=top_track_names, top_artist_image=top_artist_image, genres=top_genres)
 
 if __name__ == "__main__":
     app.run(debug=True, port=PORT)
