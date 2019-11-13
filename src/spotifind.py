@@ -3,6 +3,7 @@ from flask import Flask, request, redirect, g, render_template
 import requests
 import data_handler as dh
 from urllib.parse import quote
+import visualizations as viz
 
 app = Flask(__name__)
 
@@ -21,7 +22,7 @@ REDIRECT_URI = "http://localhost:8888/callback"
 SCOPE = "user-top-read"
 #can be short_term, medium_term, or long_term
 #TODO: take this in from user input
-TIME_RANGE = "medium_term"
+TIME_RANGE = "long_term"
 
 auth_query_parameters = {
     "response_type": "code",
@@ -68,7 +69,13 @@ def callback():
     top_track_names = dh.get_top_track_names()
     top_artist_names = dh.get_top_artist_names()
     top_artist_image = dh.get_top_artist_image()
-    top_genres = dh.get_top_genres_data()['top_50_genres_list']
+    genres_data = dh.get_top_genres_data()
+
+    viz.create_top_genres_pie_chart(genres_data)
+    viz.create_acoustic_vs_non_acoustic_pie_chart(dh.get_acoustic_data())
+    viz.create_live_vs_studio_pie_chart(dh.get_live_data())
+
+    top_genres = genres_data['top_50_genres_list']
 
     return render_template('stat-query.html', artists=top_artist_names,
                            tracks=top_track_names, top_artist_image=top_artist_image, genres=top_genres)
