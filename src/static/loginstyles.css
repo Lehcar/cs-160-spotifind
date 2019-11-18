@@ -39,3 +39,8 @@ h3{
     cursor: pointer;
     border-radius: 30px;
 }
+
+.loginButton:hover{
+    background-color: #A71919;
+    color: white;
+}

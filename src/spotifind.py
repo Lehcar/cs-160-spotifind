@@ -21,8 +21,9 @@ PORT = 8888
 REDIRECT_URI = "http://localhost:8888/callback"
 SCOPE = "user-top-read"
 #can be short_term, medium_term, or long_term
-#TODO: take this in from user input
-TIME_RANGE = "long_term"
+TIME_RANGE = "short_term"
+auth_token = None
+post_request = None
 
 auth_query_parameters = {
     "response_type": "code",
@@ -38,24 +39,34 @@ def login_page():
 
 @app.route("/home")
 def index():
+    global TIME_RANGE
     # Auth Step 1: Authorization
     url_args = "&".join(["{}={}".format(key, quote(val)) for key, val in auth_query_parameters.items()])
     auth_url = "{}/?{}".format(SPOTIFY_AUTH_URL, url_args)
     return redirect(auth_url)
 
+@app.route("/query")
+def querypage():
+    render_template('stat-query.html');
+
 
 @app.route("/callback")
 def callback():
     # Auth Step 4: Requests refresh and access tokens
-    auth_token = request.args['code']
-    code_payload = {
-        "grant_type": "authorization_code",
-        "code": str(auth_token),
-        "redirect_uri": REDIRECT_URI,
-        'client_id': CLIENT_ID,
-        'client_secret': CLIENT_SECRET,
-    }
-    post_request = requests.post(SPOTIFY_TOKEN_URL, data=code_payload)
+    global auth_token, post_request
+
+    #check to see if we already received authorization
+    if auth_token == None:
+        auth_token = request.args['code']
+        code_payload = {
+            "grant_type": "authorization_code",
+            "code": str(auth_token),
+            "redirect_uri": REDIRECT_URI,
+            'client_id': CLIENT_ID,
+            'client_secret': CLIENT_SECRET,
+        }
+    if post_request == None:
+        post_request = requests.post(SPOTIFY_TOKEN_URL, data=code_payload)
 
     # Auth Step 5: Tokens are Returned to Application
     response_data = json.loads(post_request.text)
@@ -79,6 +90,16 @@ def callback():
 
     return render_template('stat-query.html', artists=top_artist_names,
                            tracks=top_track_names, top_artist_image=top_artist_image, genres=top_genres)
+
+
+@app.route("/callback", methods=['GET', 'POST'])
+def change_time_frame():
+    global TIME_RANGE # used to access the global TIME_RANGE value
+    if request.method == 'POST':
+        TIME_RANGE = request.form.get('time_range')
+
+    return index()
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=PORT)
