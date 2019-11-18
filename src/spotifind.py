@@ -22,6 +22,8 @@ SCOPE = "user-top-read"
 #can be short_term, medium_term, or long_term
 #TODO: take this in from user input
 TIME_RANGE = "short_term"
+auth_token = None
+post_request = None
 
 auth_query_parameters = {
     "response_type": "code",
@@ -53,15 +55,19 @@ def querypage():
 def callback():
     global TIME_RANGE
     # Auth Step 4: Requests refresh and access tokens
-    auth_token = request.args['code']
-    code_payload = {
-        "grant_type": "authorization_code",
-        "code": str(auth_token),
-        "redirect_uri": REDIRECT_URI,
-        'client_id': CLIENT_ID,
-        'client_secret': CLIENT_SECRET,
-    }
-    post_request = requests.post(SPOTIFY_TOKEN_URL, data=code_payload)
+    global auth_token
+    global post_request
+    if auth_token == None:
+        auth_token = request.args['code']
+        code_payload = {
+            "grant_type": "authorization_code",
+            "code": str(auth_token),
+            "redirect_uri": REDIRECT_URI,
+            'client_id': CLIENT_ID,
+            'client_secret': CLIENT_SECRET,
+        }
+    if post_request == None:
+        post_request = requests.post(SPOTIFY_TOKEN_URL, data=code_payload)
 
     # Auth Step 5: Tokens are Returned to Application
     response_data = json.loads(post_request.text)

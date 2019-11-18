@@ -21,6 +21,16 @@ SPOTIFY_AUDIO_FEATURES = "https://api.spotify.com/v1/audio-features"
 
 def get_data(access_token, time_range):
     track_ids = []
+    global top_track_names, top_artist_names, top_genres, live_tracks, studio_tracks, acoustic_tracks,\
+        non_acoustic_tracks, top_artist_image
+    top_track_names = []
+    top_artist_names = []
+    top_genres = []
+    live_tracks = []
+    studio_tracks = []
+    acoustic_tracks = []
+    non_acoustic_tracks = []
+    top_artist_image = None
 
     authorization_header = {"Authorization": "Bearer {}".format(access_token)}
 
