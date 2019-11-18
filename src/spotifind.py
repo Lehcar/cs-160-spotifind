@@ -21,7 +21,7 @@ REDIRECT_URI = "http://localhost:8888/callback"
 SCOPE = "user-top-read"
 #can be short_term, medium_term, or long_term
 #TODO: take this in from user input
-TIME_RANGE = "medium_term"
+TIME_RANGE = "short_term"
 
 auth_query_parameters = {
     "response_type": "code",
@@ -37,14 +37,21 @@ def login_page():
 
 @app.route("/home")
 def index():
+    global TIME_RANGE
+    print(TIME_RANGE)
     # Auth Step 1: Authorization
     url_args = "&".join(["{}={}".format(key, quote(val)) for key, val in auth_query_parameters.items()])
     auth_url = "{}/?{}".format(SPOTIFY_AUTH_URL, url_args)
     return redirect(auth_url)
 
+@app.route("/query")
+def querypage():
+    render_template('stat-query.html');
+
 
 @app.route("/callback")
 def callback():
+    global TIME_RANGE
     # Auth Step 4: Requests refresh and access tokens
     auth_token = request.args['code']
     code_payload = {
@@ -70,8 +77,20 @@ def callback():
     top_artist_image = dh.get_top_artist_image()
     top_genres = dh.get_top_genres_data()['top_50_genres_list']
 
+    print(top_artist_names)
+
     return render_template('stat-query.html', artists=top_artist_names,
                            tracks=top_track_names, top_artist_image=top_artist_image, genres=top_genres)
+
+
+@app.route("/callback", methods=['GET', 'POST'])
+def change_time_frame():
+    global TIME_RANGE # used to access the global TIME_RANGE value
+    if request.method == 'POST':
+        TIME_RANGE = request.form.get('time_range')
+
+    return index()
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=PORT)
