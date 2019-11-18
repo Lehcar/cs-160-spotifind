@@ -20,7 +20,6 @@ PORT = 8888
 REDIRECT_URI = "http://localhost:8888/callback"
 SCOPE = "user-top-read"
 #can be short_term, medium_term, or long_term
-#TODO: take this in from user input
 TIME_RANGE = "short_term"
 auth_token = None
 post_request = None
@@ -53,10 +52,10 @@ def querypage():
 
 @app.route("/callback")
 def callback():
-    global TIME_RANGE
     # Auth Step 4: Requests refresh and access tokens
-    global auth_token
-    global post_request
+    global auth_token, post_request
+
+    #check to see if we already received authorization
     if auth_token == None:
         auth_token = request.args['code']
         code_payload = {
