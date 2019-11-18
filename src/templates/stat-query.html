@@ -6,60 +6,63 @@
     <link rel="stylesheet" type="text/css" href="../static/queryStyles.css">
 
 </head>
+
 <body style="background-image: url({{top_artist_image}});">
-<body>
-<!-- Header with link to return to homepage -->
-<div class="header">
-    <div class="dropdownMenu" style="margin-left: 20px;">
-        <form method ="POST"><p>Music History: <select name="time_range">
-            <option value="short_term">Recent</option>
-            <option value="medium_term">Long Term</option>
-            <option value="long_term">All Time</option>
-        </select><input type="submit">
+    <body>
+    <!-- Header with link to return to homepage -->
+        <div class="header">
+            <div class="dropdownMenu" style="margin-left: 20px;">
+                <form method ="POST"><p>Music History: <select name="time_range">
+                    <option value="short_term">Recent</option>
+                    <option value="medium_term">Long Term</option>
+                    <option value="long_term">All Time</option>
+                </select><input type="submit">
 
-    <a class="logo" href="/home">
-        <img alt="SpotiFind Home" src="../static/logo.png" height="40" width="200" >
-    </a></p></form></div>
-</div>
+            <a class="logo" href="/home">
+                <img alt="SpotiFind Home" src="../static/logo.png" height="40" width="200" >
+            </a></p></form></div>
+        </div>
 
-<!-- Cards for top artists/songs/genres -->
-<div class="results" id="artists">
-    <h2>Top Artists</h2>
-    <ol>
-        {% for artist in artists %}
-        <li> {{ artist }}  </li>
-        {% endfor %}
-    </ol>
-</div>
-<div class="results" id="tracks">
-    <h2>Top Tracks</h2>
-    <ol>
-        {% for song in tracks %}
-        <li> {{ song }}  </li>
-        {% endfor %}
-    </ol>
-</div>
-<div class="results" id="genres">
-    <h2>Top Genres</h2>
-    <ol>
-        {% for genre in genres %}
-        <li> {{ genre }}  </li>
-        {% endfor %}
-    </ol>
-</div>
+        <!-- Cards for top artists/songs/genres -->
+        <div class="results" id="artists">
+            <h2>Top Artists</h2>
+            <ol>
+                {% for artist in artists %}
+                <li> {{ artist }}  </li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div class="results" id="tracks">
+            <h2>Top Tracks</h2>
+            <ol>
+                {% for song in tracks %}
+                <li> {{ song }}  </li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div class="results" id="genres">
+            <h2>Top Genres</h2>
+            <ol>
+                {% for genre in genres %}
+                <li> {{ genre }}  </li>
+                {% endfor %}
+            </ol>
+        </div>
 
-<!-- Pie Chart Cards -->
-<div class="chartCard" id="genreCard">
-    <h2>Your Top Genres</h2>
-</div>
+        <!-- Pie Chart Cards -->
+        <div class="chartCard" id="genreCard">
+            <h2>Your Top Genres</h2>
+            <img alt="Top Artist Genres Pie Chart" src="../static/genres_pie_chart.png" style="margin-left: auto;
+            margin-right: auto; display: block">
+        </div>
 
-<div class="chartCard" id="LiveCard">
-    <h2>Live vs Studio Tracks</h2>
-</div>
+        <div class="chartCard" id="LiveCard">
+            <h2>Live vs Studio Tracks</h2>
+        </div>
 
-<div class="chartCard" id="AcousticCard">
-    <h2>Acoustic vs Non-Acoustic Tracks</h2>
-</div>
+        <div class="chartCard" id="AcousticCard">
+            <h2>Acoustic vs Non-Acoustic Tracks</h2>
+        </div>
 
-</body>
+    </body>
 </html>

@@ -39,7 +39,6 @@ def login_page():
 @app.route("/home")
 def index():
     global TIME_RANGE
-    print(TIME_RANGE)
     # Auth Step 1: Authorization
     url_args = "&".join(["{}={}".format(key, quote(val)) for key, val in auth_query_parameters.items()])
     auth_url = "{}/?{}".format(SPOTIFY_AUTH_URL, url_args)
@@ -81,8 +80,6 @@ def callback():
     top_artist_names = dh.get_top_artist_names()
     top_artist_image = dh.get_top_artist_image()
     top_genres = dh.get_top_genres_data()['top_50_genres_list']
-
-    print(top_artist_names)
 
     return render_template('stat-query.html', artists=top_artist_names,
                            tracks=top_track_names, top_artist_image=top_artist_image, genres=top_genres)
