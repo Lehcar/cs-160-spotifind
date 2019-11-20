@@ -76,6 +76,7 @@ def callback():
 
     dh.get_data(access_token, TIME_RANGE)
 
+    # Retrieve and populate the datasets to display on the page
     top_track_names = dh.get_top_track_names()
     top_artist_names = dh.get_top_artist_names()
     top_artist_image = dh.get_top_artist_image()
