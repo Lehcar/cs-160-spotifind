@@ -1,8 +1,9 @@
 body{
-    background-color: green;
+    background-color: black;
     background-size: cover;
 }
 
+/* =========== Header Elements =======================================*/
 .header{
     font-family: 'Arial';
     color: white;
@@ -18,15 +19,18 @@ body{
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
-        position: relative;
+    position: relative;
 }
 
 .logo:hover{
     right:20px;
 }
 
+/*============== List Cards ==========================================*/
 .results{
-    background-color: white;
+    background-color: rgba(255,255,255, 0.5);
+    color: white;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, .5);
     border: none;
     width: 515px;
     height: 700px;
@@ -37,20 +41,32 @@ body{
     margin: 20px 20px;
     font-family: 'Arial Black';
     text-align: left;
-        top: 20px;
+
+    /*Animation*/
+    top: 20px;
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
-        position: relative;
+    position: relative;
 }
 
+.results:hover{
+    background-color: white;
+    top:10px;
+}
 
 .results::-webkit-scrollbar {
     display: none;
 }
-.results:hover{
-    top:10px;
+
+.results ol{
+    color: white;
+}
+
+.results:hover h2, .results:hover ol{
+    color: black;
+    text-shadow: none;
 }
 
 h2{
@@ -73,18 +89,47 @@ ol{
     float:left;
 }
 
+/* ============ Pie Chart Cards ======================================*/
 .chartCard{
-    background-color: white;
+    background-color: rgba(255,255,255, 0.5);
     border: none;
-    width: 97%;
-    height: 700px;
+    width: 30.5%;
+    height: 550px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     text-align: center;
-    /*overflow:scroll;*/
     border-radius: 30px;
     margin: 20px 20px;
     font-family: 'Arial Black';
     text-align: left;
+
+    /*Animation*/
+    top: 20px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+}
+
+.chartCard:hover{
+    top: 10px;
+    background-color: white;
+}
+
+.chartCard:hover h2{
+    color: black;
+    text-shadow: none;
+}
+
+.chartCard h2{
+    color: white;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, .5);
+}
+
+.chartCard img {
+    margin-left: 0px;
+    margin-right: auto;
+    display: block;
 }
 
 #genreCard{
