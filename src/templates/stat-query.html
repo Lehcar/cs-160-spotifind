@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Get Song Stats</title>
-    <link rel="stylesheet" type="text/css" href="../static/queryStyles.css">
-</head>
-<body style="background-image: url({{top_artist_image}});">
-    <a class="logo" href="/home">
-        <img alt="SpotiFind Home" src="../static/logo.png" height="40" width="200" >
-    </a>
-<div class="results" id="artists">
-    <h2>Top Artists</h2>
-    <ol>
-        {% for artist in artists %}
-        <li> {{ artist }}  </li>
-        {% endfor %}
-    </ol>
-</div>
-<div class="results" id="tracks">
-    <h2>Top Tracks</h2>
-    <ol>
-        {% for song in tracks %}
-        <li> {{ song }}  </li>
-        {% endfor %}
-    </ol>
-</div>
-<div class="results" id="genres">
-    <h2>Top Genres</h2>
-    <ol>
-        {% for genre in genres %}
-        <li> {{ genre }}  </li>
-        {% endfor %}
-    </ol>
-</div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Get Song Stats</title>
+        <link rel="stylesheet" type="text/css" href="../static/queryStyles.css">
+    </head>
+    <body style="background-image: url({{top_artist_image}});">
+        <div class="logo">
+            <a href="/home">
+            <img alt="SpotiFind Home" src="../static/logo.png" height="40" width="200" >
+            </a>
+        </div>
+        <div class="results" id="artists">
+            <h2>Top Artists</h2>
+            <ol>
+                {% for artist in artists %}
+                <li> {{ artist }}  </li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div class="results" id="tracks">
+            <h2>Top Tracks</h2>
+            <ol>
+                {% for song in tracks %}
+                <li> {{ song }}  </li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div class="results" id="genres">
+            <h2>Top Genres</h2>
+            <ol>
+                {% for genre in genres %}
+                <li> {{ genre }}  </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </body>
 </html>
