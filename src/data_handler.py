@@ -1,4 +1,3 @@
-import json
 import requests
 from collections import defaultdict
 from collections import OrderedDict
@@ -33,11 +32,8 @@ def get_data(access_token, time_range):
     top_artist_image = None
 
     authorization_header = {"Authorization": "Bearer {}".format(access_token)}
-
     get_user_top_tracks(authorization_header, time_range, track_ids)
-
     get_user_top_artists(authorization_header, time_range)
-
     get_audio_features(authorization_header, track_ids)
 
 
@@ -64,8 +60,9 @@ def get_user_top_artists(authorization_header, time_range):
 
 
 def get_audio_features(authorization_header, track_ids):
+    tracks = ','.join(map(str, track_ids))
     get_audio_features_api_endpoint = SPOTIFY_AUDIO_FEATURES
-    audio_features_params = {"ids": track_ids}
+    audio_features_params = {"ids": tracks}
     features = requests.get(get_audio_features_api_endpoint, headers=authorization_header,
                             params=audio_features_params).json()
     for track in features['audio_features']:
@@ -73,6 +70,7 @@ def get_audio_features(authorization_header, track_ids):
             live_tracks.append(track['id'])
         else:
             studio_tracks.append(track['id'])
+
         if track['acousticness'] > 0.5:
             acoustic_tracks.append(track['id'])
         else:
@@ -96,12 +94,9 @@ def process_top_genres():
     top_5_genres_num_list = [x[1] for x in top_5_genres]
     num_of_other_genres = num_of_genres - sum(map(lambda x: x, top_5_genres_num_list))
     top_5_genres_num_list.append(num_of_other_genres)
-    top_5_genres_percentages = [str('{0:.2f}'.format(x / num_of_genres * 100)) + "%" for x in top_5_genres_num_list]
-
     top_50_genres_list = list(islice(ordered_dict.keys(), 50))
     return {'num_of_genres': num_of_genres, 'top_50_genres_list': top_50_genres_list,
-            'top_5_genres_names_list': top_5_genres_names_list, 'top_5_genres_num_list': top_5_genres_num_list,
-            'top_5_genres_percentages': top_5_genres_percentages}
+            'top_5_genres_names_list': top_5_genres_names_list, 'top_5_genres_num_list': top_5_genres_num_list}
 
 
 def get_top_artist_image():
@@ -120,26 +115,10 @@ def get_top_genres_data():
     return process_top_genres()
 
 
-def get_live_track_list():
-    return live_tracks
+def get_live_data():
+    return {'live_list': live_tracks, 'studio_list': studio_tracks,
+            'num_live': len(live_tracks), 'num_studio': len(studio_tracks)}
 
-
-def get_studio_track_list():
-    return studio_tracks
-
-
-def get_percentage_live():
-    return str((len(get_live_track_list()) / (len(get_live_track_list()) + len(get_studio_track_list()))) * 100) + "%"
-
-
-def get_acoustic_track_list():
-    return acoustic_tracks
-
-
-def get_non_acoustic_track_list():
-    return non_acoustic_tracks
-
-
-def get_percentage_acoustic():
-    return str((len(get_acoustic_track_list()) / (
-                len(get_acoustic_track_list()) + len(get_non_acoustic_track_list()))) * 100) + "%"
+def get_acoustic_data():
+    return {'acoustic_list': acoustic_tracks, 'non_acoustic_list': non_acoustic_tracks,
+            'num_acoustic': len(acoustic_tracks), 'num_non_acoustic': len(non_acoustic_tracks)}

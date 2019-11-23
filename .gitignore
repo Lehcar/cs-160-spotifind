@@ -20,3 +20,4 @@ build/
 */.DS_Store
 .DS_Store
 
+src/static/*_pie_chart.png
