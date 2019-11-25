@@ -40,12 +40,6 @@ body{
     text-shadow: 1px 1px 8px rgba(0, 0, 0, .4);
 }
 
-/*============== Page Contents =======================================*/
-.content{
-    display: grid;
-    grid-template-columns: repeat(3, 550px);
-}
-
 /*============== List Cards ==========================================*/
 .results{
     background-color: rgba(255,255,255, 0.5);
@@ -113,7 +107,7 @@ ol{
 .chartCard{
     background-color: rgba(255,255,255, 0.5);
     border: none;
-    width: 515px;
+    width: 30.5%;
     height: 550px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     text-align: center;
@@ -147,7 +141,7 @@ ol{
 }
 
 .chartCard img {
-    margin-left: 0;
+    margin-left: 0px;
     margin-right: auto;
     display: block;
 }
