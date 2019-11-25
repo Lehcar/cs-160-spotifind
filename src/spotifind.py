@@ -42,7 +42,6 @@ def login_page():
 
 @app.route("/home")
 def index():
-    global TIME_RANGE
     # Auth Step 1: Authorization
     url_args = "&".join(["{}={}".format(key, quote(val)) for key, val in auth_query_parameters.items()])
     auth_url = "{}/?{}".format(SPOTIFY_AUTH_URL, url_args)
@@ -104,7 +103,8 @@ def change_time_frame():
 
     return index()
 
-# No caching at all for API endpoints.
+# Route that will reset cache and will allow pie chart images to
+# display the proper pie chart on refresh
 @app.after_request
 def add_header(response):
     # response.cache_control.no_store = True
