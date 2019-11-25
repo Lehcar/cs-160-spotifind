@@ -26,6 +26,20 @@ body{
     right:20px;
 }
 
+.header .dropdownMenu button{
+    font-family: 'Arial';
+    background-color: white;
+    color: #A71919;
+    border: none;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, .2);
+}
+
+.header .dropdownMenu p{
+    font-family: 'Arial Black';
+    font-size: large;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, .4);
+}
+
 /*============== List Cards ==========================================*/
 .results{
     background-color: rgba(255,255,255, 0.5);

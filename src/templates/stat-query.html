@@ -11,11 +11,10 @@
 <div class="header">
     <div class="dropdownMenu" style="margin-left: 20px;">
         <form method="POST">
-            <p>Music History: <select name="time_range">
-                <option value="short_term">Recent</option>
-                <option value="medium_term">Long Term</option>
-                <option value="long_term">All Time</option>
-            </select><input type="submit">
+
+            <p>Music History: <button name="time_range" type="submit" value="short_term">Recent</button>
+                <button name="time_range" type="submit" value="medium_term">Long Term</button>
+                <button name="time_range" type="submit" value="long_term">All Time</button>
 
                 <a class="logo" href="/home">
                     <img alt="SpotiFind Home" src="../static/logo.png" height="40" width="200">
@@ -59,12 +58,12 @@
 
 <div class="chartCard" id="LiveCard">
     <h2>Live vs Studio Tracks</h2>
-    <img alt="Live vs Studio Pie Chart" src="../static/genres_pie_chart.png" height="70%" width="100%">
+    <img alt="Live vs Studio Pie Chart" src="../static/live_pie_chart.png" height="70%" width="100%">
 </div>
 
 <div class="chartCard" id="AcousticCard">
     <h2>Acoustic vs Non-Acoustic Tracks</h2>
-    <img alt="Acoustic vs Non-Acoustic Pie Chart" src="../static/genres_pie_chart.png" height="70%" width="100%">
+    <img alt="Acoustic vs Non-Acoustic Pie Chart" src="../static/acoustic_pie_chart.png" height="70%" width="100%">
 </div>
 
 </body>

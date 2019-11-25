@@ -95,12 +95,22 @@ def callback():
 
 @app.route("/callback", methods=['GET', 'POST'])
 def change_time_frame():
-    global TIME_RANGE # used to access the global TIME_RANGE value
+    global TIME_RANGE  # used to access the global TIME_RANGE value
     if request.method == 'POST':
         TIME_RANGE = request.form.get('time_range')
 
     return index()
 
+# No caching at all for API endpoints.
+@app.after_request
+def add_header(response):
+    # response.cache_control.no_store = True
+    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '-1'
+    return response
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=PORT)
+    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
