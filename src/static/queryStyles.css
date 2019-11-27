@@ -1,16 +1,52 @@
 body{
-    background-color: green;
+    background-color: black;
     background-size: cover;
+}
+
+/* =========== Header Elements =======================================*/
+.header{
+    font-family: 'Arial';
+    color: white;
+    width:100%;
+    height:40px;
+    left:0;
 }
 
 .logo{
     float:right;
+    right:10px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    position: relative;
 }
 
-.results{
+.logo:hover{
+    right:20px;
+}
+
+.header .dropdownMenu button{
+    font-family: 'Arial';
     background-color: white;
+    color: #A71919;
     border: none;
-    width: 500px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, .2);
+}
+
+.header .dropdownMenu p{
+    font-family: 'Arial Black';
+    font-size: large;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, .4);
+}
+
+/*============== List Cards ==========================================*/
+.results{
+    background-color: rgba(255,255,255, 0.5);
+    color: white;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, .5);
+    border: none;
+    width: 515px;
     height: 700px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     text-align: center;
@@ -19,15 +55,36 @@ body{
     margin: 20px 20px;
     font-family: 'Arial Black';
     text-align: left;
+
+    /*Animation*/
+    top: 20px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    position: relative;
 }
 
+.results:hover{
+    background-color: white;
+    top:10px;
+}
 
 .results::-webkit-scrollbar {
     display: none;
 }
 
+.results ol{
+    color: white;
+}
+
+.results:hover h2, .results:hover ol{
+    color: black;
+    text-shadow: none;
+}
+
 h2{
-    margin-left: 15px;
+    margin-left: 20px;
 }
 
 ol{
@@ -39,5 +96,64 @@ ol{
 }
 
 #tracks{
+    float:left;
+}
+
+#genres{
+    float:left;
+}
+
+/* ============ Pie Chart Cards ======================================*/
+.chartCard{
+    background-color: rgba(255,255,255, 0.5);
+    border: none;
+    width: 30.5%;
+    height: 550px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    text-align: center;
+    border-radius: 30px;
+    margin: 20px 20px;
+    font-family: 'Arial Black';
+    text-align: left;
+
+    /*Animation*/
+    top: 20px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+}
+
+.chartCard:hover{
+    top: 10px;
+    background-color: white;
+}
+
+.chartCard:hover h2{
+    color: black;
+    text-shadow: none;
+}
+
+.chartCard h2{
+    color: white;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, .5);
+}
+
+.chartCard img {
+    margin-left: 0px;
+    margin-right: auto;
+    display: block;
+}
+
+#genreCard{
+    float:left;
+}
+
+#LiveCard{
+    float:left;
+}
+
+#AcousticCard{
     float:left;
 }

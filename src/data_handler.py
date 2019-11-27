@@ -20,6 +20,17 @@ SPOTIFY_AUDIO_FEATURES = "https://api.spotify.com/v1/audio-features"
 
 def get_data(access_token, time_range):
     track_ids = []
+    global top_track_names, top_artist_names, top_genres, live_tracks, studio_tracks, acoustic_tracks,\
+        non_acoustic_tracks, top_artist_image
+    top_track_names = []
+    top_artist_names = []
+    top_genres = []
+    live_tracks = []
+    studio_tracks = []
+    acoustic_tracks = []
+    non_acoustic_tracks = []
+    top_artist_image = None
+
     authorization_header = {"Authorization": "Bearer {}".format(access_token)}
     get_user_top_tracks(authorization_header, time_range, track_ids)
     get_user_top_artists(authorization_header, time_range)
@@ -107,7 +118,6 @@ def get_top_genres_data():
 def get_live_data():
     return {'live_list': live_tracks, 'studio_list': studio_tracks,
             'num_live': len(live_tracks), 'num_studio': len(studio_tracks)}
-
 
 def get_acoustic_data():
     return {'acoustic_list': acoustic_tracks, 'non_acoustic_list': non_acoustic_tracks,
