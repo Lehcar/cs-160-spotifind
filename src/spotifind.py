@@ -24,6 +24,9 @@ SCOPE = "user-top-read"
 TIME_RANGE = "short_term"
 auth_token = None
 post_request = None
+GENRE_PIE_CHART_FILE_PATH = "./static/genres_pie_chart.png"
+ACOUSTIC_PIE_CHART_FILE_PATH = "./static/acoustic_pie_chart.png"
+LIVE_PIE_CHART_FILE_PATH = "./static/live_pie_chart.png"
 
 auth_query_parameters = {
     "response_type": "code",
@@ -82,9 +85,9 @@ def callback():
     top_artist_image = dh.get_top_artist_image()
     genres_data = dh.get_top_genres_data()
 
-    viz.create_top_genres_pie_chart(genres_data)
-    viz.create_acoustic_vs_non_acoustic_pie_chart(dh.get_acoustic_data())
-    viz.create_live_vs_studio_pie_chart(dh.get_live_data())
+    viz.create_top_genres_pie_chart(genres_data, GENRE_PIE_CHART_FILE_PATH)
+    viz.create_acoustic_vs_non_acoustic_pie_chart(dh.get_acoustic_data(), ACOUSTIC_PIE_CHART_FILE_PATH)
+    viz.create_live_vs_studio_pie_chart(dh.get_live_data(), LIVE_PIE_CHART_FILE_PATH)
 
     top_genres = genres_data['top_50_genres_list']
 
